@@ -1,0 +1,83 @@
+---
+title: "simpleRegress"
+author: "Zoilo Franco"
+date: "Spring 2026"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## make a simple regression model
+
+```{r}
+bears <- read.csv(file="BEARS.csv",header = TRUE)
+#adjust factors to be factors
+bears$SEX<- as.factor(bears$SEX)
+bears$MONTH<- as.factor(bears$MONTH)
+```
+
+## Model LENGTH ~ NECK  this is an example  
+
+```{r}
+simp <- lm(LENGTH~NECK,data=bears)
+plot(LENGTH~NECK,data=bears)
+abline(simp)
+summary.lm(simp)
+```
+
+
+Compare all models that predict LENGTH other than NECK. Then order them from worst to best by its value of Adjusted-Rsquared (bigger is better), or by RSE (residual standard error) where smaller is better. 
+    
+## Model LENGTH ~ HEADLEN
+
+```{r}
+L1 <- lm(LENGTH~HEADLEN,data=bears)
+plot(LENGTH~HEADLEN,data=bears)
+abline(L1)
+summary.lm(L1)
+```
+    
+The plot shows a good linear relationship.    
+The Adjusted R-Squared is 0.8434   
+    
+## Model LENGTH ~ HeadWTH
+    
+```{r}
+L2 <- lm(LENGTH~HEADWTH,data=bears)
+plot(LENGTH~HEADWTH,data=bears)
+abline(L2)
+summary.lm(L2)
+```
+    
+The plot shows a good linear relationship.    
+The Adjusted R-Squared is 0.5321
+
+## Model LENGTH ~ CHEST
+
+```{r}
+L3 <- lm(LENGTH~CHEST,data=bears)
+plot(LENGTH~CHEST,data=bears)
+abline(L3)
+summary.lm(L3)
+```
+    
+The plot shows a good linear relationship.    
+The Adjusted R-Squared is 0.7869   
+    
+## Model LENGTH ~ WEIGHT
+    
+```{r}
+L4 <- lm(LENGTH~WEIGHT,data=bears)
+plot(LENGTH~WEIGHT,data=bears)
+abline(L4)
+summary.lm(L4)
+```
+    
+The plot shows a good linear relationship.    
+The Adjusted R-Squared is 0.7423 
+    
+## Models from WORST to BEST
+    
+The models range from HEADWTH 0.5321, Weight 0.7423, CHEST.7869, to HEADLEN 0.8434 using Adjusted R-Squared. 
